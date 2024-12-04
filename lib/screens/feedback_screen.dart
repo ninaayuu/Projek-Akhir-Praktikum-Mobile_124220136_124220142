@@ -8,11 +8,9 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> initNotification() async {
-  
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('flutter_logo'); 
+        AndroidInitializationSettings('flutter_logo');
 
-  
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
       requestAlertPermission: true,
@@ -20,17 +18,15 @@ class NotificationService {
       requestSoundPermission: true,
     );
 
- 
     const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
 
-
     await notificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
-        
+        // Tambahkan logika untuk menangani respons notifikasi jika diperlukan
       },
     );
   }
@@ -38,10 +34,10 @@ class NotificationService {
   NotificationDetails notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        'channelId', 
+        'channelId',
         'channelName',
         importance: Importance.max,
-        priority: Priority.high, 
+        priority: Priority.high,
       ),
       iOS: DarwinNotificationDetails(),
     );
@@ -62,6 +58,10 @@ class NotificationService {
 }
 
 class FeedbackScreen extends StatefulWidget {
+  final String username; // Tambahkan parameter username
+
+  FeedbackScreen({required this.username}); // Tambahkan konstruktor
+
   @override
   _FeedbackScreenState createState() => _FeedbackScreenState();
 }
@@ -84,31 +84,31 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SekolahListScreen()),
+          MaterialPageRoute(builder: (context) => SekolahListScreen(username: widget.username)), // Kirim username
         );
         break;
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => ProfileScreen(username: widget.username)), // Kirim username
         );
         break;
       case 2:
-      
         break;
     }
   }
-void _showNotification() async {
-  try {
-    await _notificationService.showNotification(
-      title: 'Notifikasi',
-      body: 'Notifikasi muncul!',
-    );
-    debugPrint("Notifikasi berhasil dikirim.");
-  } catch (e) {
-    debugPrint("Gagal mengirim notifikasi: $e");
+
+  void _showNotification() async {
+    try {
+      await _notificationService.showNotification(
+        title: 'Notifikasi',
+        body: 'Notifikasi muncul!',
+      );
+      debugPrint("Notifikasi berhasil dikirim.");
+    } catch (e) {
+      debugPrint("Gagal mengirim notifikasi: $e");
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +145,9 @@ void _showNotification() async {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'Kesan saya selama perkuliahan pemrograman aplikasi mobile ini menyenangkan. '
-                    'Dari awal sampai akhir, saya belajar banyak hal baru, Walaupun kadang pusing sama error di kode, '
-                    'Terima kasih untuk pak Bagus selaku dosen pengampu mata kuliah ini yang selalu sabar membimbing kami',
+                    'Kesan kami selama perkuliahan praktikum pemrograman aplikasi mobile ini menyenangkan. '
+                    'Dari awal sampai akhir, kami belajar banyak hal baru, walaupun kadang pusing sama error di kode. '
+                    'Terima kasih untuk mba iza dan mas komang sebagai aslab pengampu mata kuliah ini yang selalu sabar membimbing kami.',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -170,25 +170,6 @@ void _showNotification() async {
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feedback),
-            label: 'Saran & Kesan',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepPurple,
-        onTap: _onItemTapped,
       ),
     );
   }

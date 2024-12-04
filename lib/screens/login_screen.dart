@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projek_mobile/screens/sekolah_list_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home_screen.dart';
 import 'signup_screen.dart';
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(username: username),
+            builder: (context) => SekolahListScreen(username: username),
           ),
         );
       }
@@ -77,13 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
         shadowColor: Colors.deepPurpleAccent,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.deepPurple, Colors.purpleAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        color: Colors.white, // Mengatur warna dasar menjadi putih
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -93,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text(
                 'Selamat Datang Kembali!',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black, // Mengubah teks agar cocok dengan latar belakang putih
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
@@ -105,11 +100,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: const TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(color: Colors.black),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.2),
+                  fillColor: Colors.grey.shade200, // Background input lebih ringan
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   border: OutlineInputBorder(
@@ -117,18 +112,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: const TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(color: Colors.black),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.2),
+                  fillColor: Colors.grey.shade200,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   border: OutlineInputBorder(
@@ -136,12 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 obscureText: true,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(height: 20.0),
               _isLoading
                   ? const Center(
-                      child: CircularProgressIndicator(color: Colors.white),
+                      child: CircularProgressIndicator(color: Colors.black),
                     )
                   : ElevatedButton(
                       onPressed: _login,
@@ -174,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text(
                   'Belum punya akun? Daftar sekarang',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.deepPurple),
                 ),
               ),
             ],

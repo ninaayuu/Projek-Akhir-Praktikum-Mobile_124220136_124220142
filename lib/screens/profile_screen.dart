@@ -3,6 +3,10 @@ import 'package:projek_mobile/screens/sekolah_list_screen.dart';
 import 'package:projek_mobile/screens/feedback_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final String username; // Tambahkan parameter username
+
+  ProfileScreen({required this.username}); // Tambahkan konstruktor
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -18,15 +22,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       case 0:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SekolahListScreen()),
+          MaterialPageRoute(
+            builder: (context) => SekolahListScreen(username: widget.username), // Kirim username
+          ),
         );
         break;
       case 1:
-        break;
+        break; // Tetap di halaman profil
       case 2:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+          MaterialPageRoute(
+            builder: (context) => FeedbackScreen(username: widget.username), // Kirim username
+          ),
         );
         break;
     }
@@ -46,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Container(
         color: Colors.deepPurple.shade50,
         padding: EdgeInsets.all(16.0),
-        child: SingleChildScrollView( // Tambahkan scroll jika konten terlalu panjang
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -60,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     image: AssetImage('assets/images/karina.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(60), // Foto berbentuk lingkaran
+                  borderRadius: BorderRadius.circular(60),
                 ),
               ),
               SizedBox(height: 16),
@@ -103,10 +111,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: BoxDecoration(
                   color: Colors.deepPurple.shade100,
                   image: DecorationImage(
-                    image: AssetImage('assets/images/profile.jpg'), // Foto kedua
+                    image: AssetImage('assets/images/profile.jpg'),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(60), // Foto berbentuk lingkaran
+                  borderRadius: BorderRadius.circular(60),
                 ),
               ),
               SizedBox(height: 16),
@@ -143,25 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feedback),
-            label: 'Saran & Kesan',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepPurple,
-        onTap: _onItemTapped,
-      ),
+      
     );
   }
 

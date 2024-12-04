@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:projek_mobile/screens/education_cost_screen.dart';
-import 'package:projek_mobile/screens/home_screen.dart';
 import 'package:projek_mobile/screens/sekolah_list_screen.dart';
 import 'package:projek_mobile/screens/login_screen.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Supabase.instance.client.auth.currentUser;
+
     return MaterialApp(
       title: 'Daftar Sekolah di Indonesia',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: Supabase.instance.client.auth.currentUser != null
-          ? HomeScreen(username: 'Default') // Berikan nilai default untuk username
+      home: user != null
+          ? SekolahListScreen(username: user.email ?? 'Pengguna') // Menggunakan email sebagai username
           : LoginScreen(),
     );
   }

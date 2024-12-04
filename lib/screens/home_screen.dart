@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projek_mobile/pages/article_page.dart';
-import 'package:projek_mobile/pages/favorites_page.dart';
 import 'package:projek_mobile/screens/camera_access_screen.dart';
 import 'education_cost_screen.dart';
 import 'school_time_zone_screen.dart';
@@ -58,19 +57,13 @@ class HomeScreen extends StatelessWidget {
                   _buildMenuButton(
                     context,
                     'Daftar Sekolah',
-                    SekolahListScreen(),
+                    SekolahListScreen(username: username), // Kirim username
                   ),
                   SizedBox(height: 20),
                   _buildMenuButton(
                     context,
                     'Berita',
                     ArticlesPage(),
-                  ),
-                  SizedBox(height: 20),
-                  _buildMenuButton(
-                    context,
-                    'Favorite Berita',
-                    FavoritesPage(favoriteArticles: favoriteArticles),
                   ),
                   SizedBox(height: 20),
                   _buildMenuButton(
